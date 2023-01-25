@@ -33,3 +33,22 @@ select, button {
     background-color: white;
     padding: 15px;  
 }
+
+#color-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.color {
+    height: 100%;
+    padding: 20px;
+
+}
+
+.hex-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 10px 0;
+}
