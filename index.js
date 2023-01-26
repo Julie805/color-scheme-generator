@@ -9,7 +9,7 @@ let hexArray = []
 
 // captures the picked color value and removes the hashtag
 inputColor.addEventListener("input", () => {
-  hexValue = inputColor.value 
+  const hexValue = inputColor.value
   seedColor = hexValue.slice(1)
 })
 
@@ -24,13 +24,13 @@ getColorBtn.addEventListener("click", ()=> {
     .then(data =>  {
       colorsArray = data.colors 
       getHex()
-      // renderHex()
     }    
  )      
 })
 
-function getHex () { 
+function getHex() { 
   hexArray = colorsArray.map(color => color.hex.value)
+  hexArray.unshift(`#${seedColor.toUpperCase()}`)
   renderHex()
 }
 
@@ -39,10 +39,14 @@ function renderHex(){
     document.getElementById("hex-container").innerHTML += `
     <p class="hex-id">${hex}</p>`
     document.getElementById("color-container").innerHTML += `
-    <div class="color-swatch">Hi</div>`
-    document.getElementById("color-container").style.backgroundColor = `${hex}`
+    <div class="color-swatch" id="${hex.slice(1)}"></div>`
+    document.getElementById(`${hex.slice(1)}`).style.backgroundColor = `${hex}`
   })
 }
+
+
+
+
 
 
 
