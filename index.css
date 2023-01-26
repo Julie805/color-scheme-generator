@@ -40,15 +40,20 @@ select, button {
     width: 100%;
 }
 
-.color {
+.color-swatch {
     height: 100%;
     padding: 20px;
 
 }
 
-.hex-container {
+#hex-container {
     display: flex;
     justify-content: space-around;
     width: 100%;
     padding: 10px 0;
+    border: red 1px solid;
+}
+
+.hex-id {
+    border: purple 1px  solid;
 }
