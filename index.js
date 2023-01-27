@@ -1,59 +1,45 @@
-
 const inputColor = document.getElementById("color-picker")
 const inputScheme = document.getElementById("select-color-types")
 const getColorBtn = document.getElementById("get-color-btn")
-
 const colorContainer = document.getElementById("color-container")
 const hexContainer = document.getElementById("hex-container")
-
 let seedColor = ""
 let seedScheme = ""
-let colorsArray = []
+let colorDataArray = []
 let hexArray = []
 
-function startScreen(){
-  hexArray.push("#FD72A1", "#4CD4B0", "#5DECBB", "#FBBF71", "#FAFC76", "#C0FD7A")
+function start(){
+  hexArray.push("#FD72A1", "#4CE4B0", "#5DECBB", "#FBBF71", "#FAFC76", "#C0FD7A")
+  seedColor = "FD72A1"
   inputColor.value = "#FD72A1"
-  
- 
+  seedScheme = "analogic-complement"
   render()
 }
+start() 
 
-startScreen() 
-
-function getData() {
-  fetch (`https://www.thecolorapi.com/scheme?hex=${seedColor}&mode=${seedScheme}`)
-  .then(response => response.json())
-  .then(data =>  {
-    colorsArray = data.colors 
-    getHex()
-  }) 
-}
-
-function getHex() { 
-  removeLastRender()
-  hexArray = colorsArray.map(color => color.hex.value)
-  hexArray.unshift(`#${seedColor.toUpperCase()}`)
-  render()
-}
-
-
-// captures the picked color value and removes the hashtag
 inputColor.addEventListener("input", () => {
   const hexValue = inputColor.value
   seedColor = hexValue.slice(1)
 })
 
-// captures the selected color type
 inputScheme.addEventListener("input", () => {
   seedScheme = inputScheme.value.toLowerCase()
 })
 
 getColorBtn.addEventListener("click", getData)
 
+function getData() {
+  fetch (`https://www.thecolorapi.com/scheme?hex=${seedColor}&mode=${seedScheme}`)
+  .then(response => response.json())
+  .then(data => {
+    colorDataArray = data.colors 
+    getHex()
+  }) 
+}
+
 function getHex() { 
   removeLastRender()
-  hexArray = colorsArray.map(color => color.hex.value)
+  hexArray = colorDataArray.map(color => color.hex.value)
   hexArray.unshift(`#${seedColor.toUpperCase()}`)
   render()
 }
